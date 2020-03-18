@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+
+<html lang = "en">
+<head>
+	<title>BMI</title>
+</head>
+<body>
+	<h1>Body Mass Index</h1>
+	<p>Complete the following form to see your BMI:</p>
+	<form>
+		<label for="fheight">Enter your height in feet:</label>
+		<input type="text" id="fheight" name="fheight"><br>
+		<label for="iheight">Enter your height in inches:</label>
+		<input type="text" id="iheight" name="iheight"><br>
+		<label for="pounds">Enter your weight in pounds:</label>
+		<input type="text" id="pounds" name="pounds"><br>
+	</form>
+	
+	<input type="submit" onclick="bmi()" value="Submit"><br>
+	
+	<p id="result"></p>
+	<p id="output"></p>
+	
+	<script>
+		function bmi() {
+			var fheight = parseFloat(document.getElementById("fheight").value);
+			var iheight = parseFloat(document.getElementById("iheight").value);
+			var pounds = parseFloat(document.getElementById("pounds").value);
+			
+			var height = parseFloat(((fheight * 12) + iheight) * 0.025);
+			var weight = pounds * 0.45;
+			var height2 = height * height;
+			var bmi = Math.round(weight / height2);
+			
+			if (bmi < 18.5) {
+				document.getElementById("result").innerHTML = "You are underweight.";
+			} else if (bmi >= 18.5 && bmi <= 24.9) {
+				document.getElementById("result").innerHTML = "You are normal weight.";
+			} else if (bmi >= 25 && bmi <= 29.9) {
+				document.getElementById("result").innerHTML = "You are overweight.";
+			} else {
+				document.getElementById("result").innerHTML = "You are obese.";
+			}
+			
+			document.getElementById("output").innerHTML = "Your BMI is " + bmi + ".";
+		}
+	</script>
+	
+</body>
+</html>

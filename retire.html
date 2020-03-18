@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+	<title>Retirement Plan</title>
+</head>
+<body>
+	<h1>Retirement Plan</h1>
+	<p>Complete the following form to see your retirement plan:</p>
+	<form>
+		<label for="age">Enter your age:</label>
+		<input type="text" id="age" name="age"><br>
+		<label for="asal">Enter your annual salary:</label>
+		<input type="text" id="asal" name="asal"><br>
+		<label for="percSave">Enter your percentage saved:</label>
+		<input type="text" id="percSave" name="percSave"><br>
+		<label for="goal">Enter your desired retirement savings goal:</label>
+		<input type="text" id="goal" name="goal"><br>
+	</form>
+	
+	<input type="submit" onclick="retire()" value="Submit"><br>
+	
+	<p id="output"></p>
+	
+	<script>
+		function retire() {
+			var age = parseFloat(document.getElementById("age").value);
+			var asal = parseFloat(document.getElementById("asal").value);
+			var percSave = parseFloat(document.getElementById("percSave").value);
+			var goal = parseFloat(document.getElementById("goal").value);
+			
+			percSave = percSave / 100;
+			var save = percSave * asal;
+			var employer = 0.35 * save;
+			var totalSave = employer + save;
+			var savings = totalSave;
+			
+			while (savings < goal) {
+				age = age + 1;
+				savings = savings + totalSave;
+				if (age >= 100) {
+					document.getElementById("output").innerHTML = "You do not reach your savings goal.";
+					break;
+				}
+			}
+			
+			if (savings >= goal) {
+				document.getElementById("output").innerHTML = "You met your savings goal at age " + age;
+			}
+		}
+	</script>
+</body>
+</html>
